@@ -21,3 +21,14 @@ app.listen(3000, () => {
 });
 
 app.use("/api/auth", authRouter);
+
+// this func is looking for a status code and message, we get it from the error coming if mongoDB couldn't save. Otherwise we have our default to fall back on
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});

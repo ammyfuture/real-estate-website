@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   console.log(req.body);
   const { username, email, password } = req.body;
   // no need for await here, hashSync is already using it
@@ -11,6 +11,6 @@ export const signup = async (req, res) => {
     await newUser.save();
     res.status(201).json("User created successfully!");
   } catch (err) {
-    res.status(500).json(err.message);
+    next(err);
   }
 };
