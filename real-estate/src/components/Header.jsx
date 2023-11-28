@@ -1,8 +1,9 @@
 // fa stands for font awesome
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Header = () => {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     //   this is the container for all elements and we set te background color here using it as well as add a text shadow
     <header className="bg-slate-200 shadow-md">
@@ -45,10 +46,18 @@ const Header = () => {
               About
             </li>
           </Link>{" "}
-          <Link to="/sign-in">
-            <li className="sm:inline text-slate-700 hover:underline">
-              Sign In
-            </li>
+          <Link to="/profile">
+            {currentUser ? (
+              <img
+                className="rounded-full h-7 w-7 object-cover"
+                src={currentUser.avatar}
+                alt="profile"
+              />
+            ) : (
+              <li className="sm:inline text-slate-700 hover:underline">
+                Sign In
+              </li>
+            )}
           </Link>
         </ul>
       </div>
