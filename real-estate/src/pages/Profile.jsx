@@ -174,6 +174,7 @@ export default function Profile() {
         setFilePerc(Math.round(progress));
       },
       (error) => {
+        console.log(error);
         setFileUploadError(true);
       },
       () => {
@@ -407,12 +408,10 @@ export default function Profile() {
                 >
                   Delete
                 </button>
-                <button
-                  onClick={() => handleListingDelete(listing._id)}
-                  className="text-green-700"
-                >
-                  Edit
-                </button>
+
+                <Link to={`/update-listings/${listing._id}`}>
+                  <button className="text-green-700">Edit</button>
+                </Link>
               </div>
             </div>
           ))}
