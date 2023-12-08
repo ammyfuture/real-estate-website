@@ -1,9 +1,47 @@
 // fa stands for font awesome
 import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 const Header = () => {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   urlParams.set("searchTerm", searchTerm);
+  //   const searchQuery = urlParams.toString();
+  //   navigate(`/search/${searchQuery}`);
+  // };
+
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(location.search);
+  //   const searchTermFromUrl = urlParams.get("searchTerm");
+  //   if (searchTermFromUrl) {
+  //     setSearchTerm(searchTermFromUrl);
+  //   }
+  // }, [location.search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [window.location.search]);
+
   return (
     //   this is the container for all elements and we set te background color here using it as well as add a text shadow
     <header className="bg-slate-200 shadow-md">
@@ -24,14 +62,21 @@ const Header = () => {
           </h1>
         </Link>
         {/* for this css, we went to the input and made its white color to transparent and added the color to the form itself and then we also added a rounded corner the goal of doing that is so we can also add the search icon from react-icon and it looking like it's apart of the input field, since we added the icon and we want them to be next to each other we added the flex so now instead of columns they're rows and we also added items-center to make them centered vertically */}
-        <form className="bg-slate-100 p-3 rounded-lg flex items-center ">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-100 p-3 rounded-lg flex items-center "
+        >
           <input
             //   for the css, for responsiveness he said first do the mobile width then the next line will be what the width will look like after mobile, we can more specific and set the width for all the diff screen sizes
             type="text"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <FaSearch className="text-slate-600" />
+          <button>
+            <FaSearch className="text-slate-600" />
+          </button>
         </form>
         {/* the menu */}
         <ul className="flex gap-4">
