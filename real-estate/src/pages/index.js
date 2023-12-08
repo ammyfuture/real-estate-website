@@ -7,3 +7,4 @@ export { default as CreateListing } from "./CreateListing";
 export { default as UpdateListings } from "./UpdateListings";
 
 export { default as Listing } from "./Listing";
+export { default as Search } from "./Search";
