@@ -1,13 +1,13 @@
 {
-  "name": "mern-estate",
+  "name": "server-of-real-estate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon api/index.js",
+    "dev": "nodemon server-of-real-estate/index.js",
     "start": "node server-of-real-estate/index.js",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+    "build": "npm install && npm install --prefix real-estate && npm run build --prefix real-estate"
   },
   "keywords": [],
   "author": "",
