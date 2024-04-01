@@ -11,8 +11,9 @@ const Home = () => {
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   console.log(offerListings);
-  console.log(rentListings);
-  console.log(saleListings);
+  // console.log(rentListings);
+  // console.log(saleListings);
+
   useEffect(() => {
     // const fetchOfferListings = async () => {
     //   try {
@@ -107,7 +108,7 @@ const Home = () => {
             <SwiperSlide key={listing._id}>
               <div
                 style={{
-                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
+                  background: `url(${listing.imageUrls[1]}) center no-repeat`,
                   backgroundSize: "cover",
                 }}
                 className="h-[500px]"
